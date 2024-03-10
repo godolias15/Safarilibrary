@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library</title>
+  <style>
+    /* CSS for book cards */
+    .book-card {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin: 10px;
+      width: 300px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .book-card h2 {
+      margin-top: 0;
+    }
+
+    .book-card p {
+      margin-bottom: 5px;
+    }
+
+    .book-card button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Library</h1>
+
+  <div id="books-container"></div>
+
+  <script>
+    // Book data
+    const books = [
+      { title: "Book 1", author: "Author 1", downloadLink: "book1.pdf", onlineLink: "https://example.com/book1" },
+      { title: "Book 2", author: "Author 2", downloadLink: "book2.pdf", onlineLink: "https://example.com/book2" },
+      { title: "Book 3", author: "Author 3", downloadLink: "book3.pdf", onlineLink: "https://example.com/book3" }
+      // Add more books as needed
+    ];
+
+    // Function to create book elements
+    function createBookElement(book) {
+      const bookElement = document.createElement("div");
+      bookElement.classList.add("book-card");
+      bookElement.innerHTML = `
+        <h2>${book.title}</h2>
+        <p>By ${book.author}</p>
+        <button onclick="downloadBook('${book.downloadLink}')">Download</button>
+        <button onclick="viewOnline('${book.onlineLink}')">View Online</button>
+      `;
+      return bookElement;
+    }
+
+    // Function to append book elements to the container
+    function renderBooks() {
+      const booksContainer = document.getElementById("books-container");
+      books.forEach(book => {
+        const bookElement = createBookElement(book);
+        booksContainer.appendChild(bookElement);
+      });
+    }
+
+    // Function to handle download button click
+    function downloadBook(downloadLink) {
+      // Perform download logic here, e.g., redirecting to download link
+      window.location.href = downloadLink;
+    }
+
+    // Function to handle view online button click
+    function viewOnline(onlineLink) {
+      // Open the online link in a new tab
+      window.open(onlineLink, "_blank");
+    }
+
+    // Render books when the page loads
+    window.onload = renderBooks;
+  </script>
+</body>
+</html>
